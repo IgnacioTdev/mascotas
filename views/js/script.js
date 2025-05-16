@@ -1,13 +1,54 @@
+// Simulamos stock inicial para cada producto
+const stockProductos = {
+    1: 10,  // Producto 1 tiene 10 unidades en stock
+    2: 5    // Producto 2 tiene 5 unidades en stock
+};
+
 let carrito = [];
-let total = 0;
 
 function agregarAlCarrito(id, categoria, nombre, valor) {
-    carrito.push({ id, categoria, nombre, valor });
+    const cantidadInput = document.getElementById(`cantidad-${id}`);
+    let cantidad = parseInt(cantidadInput.value);
+
+    if (isNaN(cantidad) || cantidad <= 0) {
+        alert("Ingrese una cantidad válida");
+        return;
+    }
+
+    if (cantidad > stockProductos[id]) {
+        alert(`Stock insuficiente. Solo quedan ${stockProductos[id]} unidades disponibles.`);
+        return;
+    }
+
+    // Ver si producto ya está en el carrito
+    const index = carrito.findIndex(item => item.id === id);
+    if (index === -1) {
+        // Agregar nuevo producto
+        carrito.push({ id, categoria, nombre, valor, cantidad });
+    } else {
+        // Actualizar cantidad (validar stock)
+        if (carrito[index].cantidad + cantidad > stockProductos[id]) {
+            alert(`No puede agregar más de ${stockProductos[id]} unidades en total.`);
+            return;
+        }
+        carrito[index].cantidad += cantidad;
+    }
+
+    // Reducir stock simulado
+    stockProductos[id] -= cantidad;
+    document.getElementById(`stock-${id}`).textContent = stockProductos[id];
+    cantidadInput.value = 1; // reset input
+
     actualizarCarrito();
 }
 
 function eliminarDelCarrito(index) {
-    total -= carrito[index].valor;
+    const item = carrito[index];
+
+    // Devolver stock simulado
+    stockProductos[item.id] += item.cantidad;
+    document.getElementById(`stock-${item.id}`).textContent = stockProductos[item.id];
+
     carrito.splice(index, 1);
     actualizarCarrito();
 }
@@ -15,22 +56,24 @@ function eliminarDelCarrito(index) {
 function actualizarCarrito() {
     const tbody = document.querySelector("#carrito tbody");
     tbody.innerHTML = "";
-    total = 0;
 
-    carrito.forEach((producto, index) => {
+    let total = 0;
+
+    carrito.forEach((item, index) => {
+        const subtotal = item.valor * item.cantidad;
+        total += subtotal;
+
         const fila = document.createElement("tr");
-
-        total += producto.valor;
-
         fila.innerHTML = `
-            <td>${producto.nombre}</td>
-            <td>$${producto.valor}</td>
-            <td>
-                <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">Eliminar</button>
-            </td>
+            <td>${item.nombre}</td>
+            <td>${item.cantidad}</td>
+            <td>$${item.valor.toLocaleString()}</td>
+            <td>$${subtotal.toLocaleString()}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">Eliminar</button></td>
         `;
+
         tbody.appendChild(fila);
     });
 
-    document.getElementById("total").innerText = total;
+    document.getElementById("total").textContent = total.toLocaleString();
 }

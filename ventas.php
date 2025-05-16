@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Tienda de Mascotas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="views/js/script.js" defer></script>
+</head>
 <body class="bg-light">
-
 <div class="container py-4">
     <h1 class="text-center mb-4">🐾 Tienda de Mascotas</h1>
 
@@ -24,27 +23,39 @@
                         <th>Categoría</th>
                         <th>Nombre</th>
                         <th>Valor Unitario</th>
+                        <th>Stock</th>
+                        <th>Cantidad</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Comida</td>
+                        <td>Gatos</td>
                         <td>Alimento Gato 1Kg</td>
                         <td>$5.000</td>
-                        <td>
-                            <button class="btn btn-success btn-sm" onclick="agregarAlCarrito(1, 'Comida', 'Alimento Gato 1Kg', 5000)">Agregar</button>
-                        </td>
+                        <td id="stock-1">10</td>
+                        <td><input type="number" id="cantidad-1" min="1" value="1" class="form-control form-control-sm" style="width:80px; margin: auto;" /></td>
+                        <td><button class="btn btn-success btn-sm" onclick="agregarAlCarrito(1, 'Comida', 'Alimento Gato 1Kg', 5000)">Agregar</button></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Juguetes</td>
                         <td>Pelota Perro</td>
                         <td>$3.000</td>
-                        <td>
-                            <button class="btn btn-success btn-sm" onclick="agregarAlCarrito(2, 'Juguetes', 'Pelota Perro', 3000)">Agregar</button>
-                        </td>
+                        <td id="stock-2">5</td>
+                        <td><input type="number" id="cantidad-2" min="1" value="1" class="form-control form-control-sm" style="width:80px; margin: auto;" /></td>
+                        <td><button class="btn btn-success btn-sm" onclick="agregarAlCarrito(2, 'Juguetes', 'Pelota Perro', 3000)">Agregar</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>Perros</td>
+                        <td>Alimento perro 1Kg</td>
+                        <td>$5.000</td>
+                        <td id="stock-1">10</td>
+                        <td><input type="number" id="cantidad-1" min="1" value="1" class="form-control form-control-sm" style="width:80px; margin: auto;" /></td>
+                        <td><button class="btn btn-success btn-sm" onclick="agregarAlCarrito(1, 'Comida', 'Alimento Gato 1Kg', 5000)">Agregar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -61,7 +72,9 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Valor</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario</th>
+                        <th>Subtotal</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -74,6 +87,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
