@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+ <head>
     <meta charset="UTF-8" />
     <title>Tienda de Mascotas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="views/js/script.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
+
 <body class="bg-light">
 <div class="container py-4">
     <h1 class="text-center mb-4">🐾 Tienda de Mascotas</h1>
@@ -14,7 +17,7 @@
     <!-- Botón para abrir modal de ingreso de producto -->
     <div class="mb-3 text-end">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngresoProducto">
-            + Ingresar Producto
+            <i class="fas fa-plus"></i> Ingresar Producto
         </button>
     </div>
 
@@ -64,7 +67,20 @@
                                 <option>9</option><option>10</option>
                             </select>
                         </td>
-                        <td><button class="btn btn-success btn-sm" onclick="agregarAlCarrito(1, 'Alimento Gato 1Kg', 5000)">Agregar</button></td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="agregarAlCarrito(1, 'Alimento Gato 1Kg', 5000)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm ms-1" onclick="editarProducto(this)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-warning btn-sm ms-1 d-none" onclick="guardarProducto(this)">
+                                <i class="fas fa-save"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm ms-1" onclick="eliminarProducto(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -87,7 +103,20 @@
                                 <option>9</option><option>10</option>
                             </select>
                         </td>
-                        <td><button class="btn btn-success btn-sm" onclick="agregarAlCarrito(2, 'Pelota Perro', 3000)">Agregar</button></td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="agregarAlCarrito(2, 'Pelota Perro', 3000)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm ms-1" onclick="editarProducto(this)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-warning btn-sm ms-1 d-none" onclick="guardarProducto(this)">
+                                <i class="fas fa-save"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm ms-1" onclick="eliminarProducto(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -110,7 +139,20 @@
                                 <option>9</option><option>10</option>
                             </select>
                         </td>
-                        <td><button class="btn btn-success btn-sm" onclick="agregarAlCarrito(3, 'Alimento perrogit 1Kg', 5000)">Agregar</button></td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="agregarAlCarrito(3, 'Alimento perrogit 1Kg', 5000)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm ms-1" onclick="editarProducto(this)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-warning btn-sm ms-1 d-none" onclick="guardarProducto(this)">
+                                <i class="fas fa-save"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm ms-1" onclick="eliminarProducto(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -140,7 +182,9 @@
             <div class="text-end">
                 <h4>Total: <span class="text-success">$<span id="total">0</span></span></h4>
             </div>
-            <button class="btn btn-success" onclick="procesarVenta()">Registrar Venta</button>
+            <button class="btn btn-success" onclick="procesarVenta()">
+                <i class="fas fa-check"></i> Registrar Venta
+            </button>
         </div>
     </div>
 </div>
@@ -193,23 +237,5 @@
   </div>
 </div>
 
-<!-- Script para buscador dinámico y agregar producto -->
-<script>
-  // Buscador dinámico
-  document.getElementById("buscador").addEventListener("input", function () {
-      const filtro = this.value.toLowerCase();
-      const filas = document.querySelectorAll("#tablaProductos tbody tr");
-
-      filas.forEach(fila => {
-          const nombre = fila.cells[2].textContent.toLowerCase(); // columna del nombre
-          fila.style.display = nombre.includes(filtro) ? "" : "none";
-      });
-  });
-
-  // Función para agregar producto al carrito (debe implementarse)
-  function agregarAlCarrito(id, nombre, valorUnitario) {
-      // Aquí va tu código para agregar al carrito
-      alert(`Producto agregado: ${nombre} - Valor: $${valorUnitario}`);
-  }
-
-  //
+</body>
+</html>
