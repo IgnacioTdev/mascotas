@@ -110,3 +110,18 @@ function procesarVenta() {
         alert("Error en la comunicación con el servidor.");
     });
 }
+
+// --- Buscador dinámico ---
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buscador = document.getElementById("buscador");
+    buscador.addEventListener("input", function () {
+        const filtro = this.value.toLowerCase();
+        const filas = document.querySelectorAll("#tablaProductos tbody tr");
+
+        filas.forEach(fila => {
+            const nombre = fila.cells[2].textContent.toLowerCase(); // columna nombre
+            fila.style.display = nombre.includes(filtro) ? "" : "none";
+        });
+    });
+});
