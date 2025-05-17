@@ -51,7 +51,7 @@
                     <tr>
                         <td>3</td>
                         <td>Perros</td>
-                        <td>Alimento perro 1Kg</td>
+                        <td>Alimento perrogit  1Kg</td>
                         <td>$5.000</td>
                         <td id="stock-1">10</td>
                         <td><input type="number" id="cantidad-1" min="1" value="1" class="form-control form-control-sm" style="width:80px; margin: auto;" /></td>
@@ -79,7 +79,13 @@
                     </tr>
                 </thead>
                 <tbody></tbody>
+
             </table>
+            
+            <h4>Total: $<span id="total">0</span></h4>
+            <button class="btn btn-success" onclick="registrarVenta()">Registrar Venta</button>
+            
+            
 
             <div class="text-end">
                 <h4>Total: <span class="text-success">$<span id="total">0</span></span></h4>

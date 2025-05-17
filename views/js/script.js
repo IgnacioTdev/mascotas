@@ -77,3 +77,38 @@ function actualizarCarrito() {
 
     document.getElementById("total").textContent = total.toLocaleString();
 }
+
+function procesarVenta() {
+    if (carrito.length === 0) {
+        alert("El carrito está vacío.");
+        return;
+    }
+
+    const datosVenta = carrito.map(item => ({
+        id_producto: item.id,
+        cantidad: item.cantidad,
+        precio_unitario: item.valor
+    }));
+
+    fetch('ajax/ventas.ajax.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productos: datosVenta })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            alert("¡Venta procesada correctamente!");
+            carrito = [];
+            actualizarCarrito();
+        } else {
+            alert("Error al procesar la venta.");
+        }
+    })
+    .catch(error => {
+        console.error("Error en la solicitud:", error);
+        alert("Error en la comunicación con el servidor.");
+    });
+}
